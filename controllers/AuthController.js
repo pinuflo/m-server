@@ -1,20 +1,16 @@
 // AuthController.js
-
-var VerifyToken = require('./VerifyToken');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
-var config = require('../config');
+const config = require('../libs/config/config.dev');
 
 var express = require('express');
 var router = express.Router();
-var bodyParser = require('body-parser');
 
-router.use(bodyParser.urlencoded({ extended: false }));
-router.use(bodyParser.json());
-var User = require('../user/User');
+var User = require('../models/User');
 
-router.post('/register', function(req, res) {
-  
+const controller = {};
+
+controller.register = async (req, res) => {
     var hashedPassword = bcrypt.hashSync(req.body.password, 8);
     
     User.create({
@@ -30,19 +26,18 @@ router.post('/register', function(req, res) {
       });
       res.status(200).send({ auth: true, token: token });
     }); 
-  });
+  }
 
-router.get('/me', VerifyToken, function(req, res, next) {
+controller.getMe = async (req, res, next) => {
   User.findById(req.userId, { password: 0 }, function (err, user) {
     if (err) return res.status(500).send("There was a problem finding the user.");
     if (!user) return res.status(404).send("No user found.");
     
     res.status(200).send(user);
   });
-});
+}
 
-
-router.post('/login', function(req, res) {
+controller.login = async (req, res) => {
   User.findOne({ email: req.body.email }, function (err, user) {
     if (err) return res.status(500).send('Error on the server.');
     if (!user) return res.status(404).send('No user found.');
@@ -53,11 +48,11 @@ router.post('/login', function(req, res) {
     });
     res.status(200).send({ auth: true, token: token });
   });
-});
+}
 
 // AuthController.js
-router.get('/logout', function(req, res) {
+controller.logout = async (req, res) => {
   res.status(200).send({ auth: false, token: null });
-});
+}
 
-module.exports = router;
+module.exports = controller;

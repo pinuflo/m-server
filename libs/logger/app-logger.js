@@ -15,6 +15,9 @@ let logger = new winston.Logger({
     transports: [
         new (winston.transports.Console)({
             colorize: true,
+            timestamp: function () {
+                return (new Date()).toISOString();
+            }
         }),
         new winston.transports.DailyRotateFile({
             filename: config.logFileName,
