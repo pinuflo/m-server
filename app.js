@@ -1,20 +1,35 @@
-var express = require('express');
-var cors = require('cors')
+const express = require('express');
+const logger = require('./libs/logger/app-logger');
+const morgan = require('morgan');
+const config = require('./libs/config/config.dev');
+const db = require('./db');
 
-var app = express();
+const app = express();
+var cors = require('cors')
 app.use(cors());
 
-var db = require('./db');
+
+const port = config.serverPort;
+
+logger.stream = {
+  write(message, encoding) {
+      logger.info(message);
+  },
+};
+
+app.use(morgan('dev', { stream: logger.stream }));
 
 //Index route
-app.get('/', (req, res,next) => {
-    res.send('Servidor corriendo...');
+app.get('/', (req, res) => {
+    res.send('Service');
 });
 
 //AUTH api
 var AuthController = require('./auth/AuthController');
 app.use('/api/auth', AuthController);
 
+app.listen(port, function() {
+    console.log('Server corriendo en puerto  ', port);
+    logger.info('Servidor corriendo - ', port);
+});
 
-
-module.exports = app;
