@@ -3,6 +3,7 @@ const logger = require('./libs/logger/app-logger');
 const morgan = require('morgan');
 const config = require('./libs/config/config.dev');
 const db = require('./db');
+const cors = require('cors')
 
 const app = express();
 
@@ -10,10 +11,11 @@ const port = config.serverPort;
 
 logger.stream = {
   write(message, encoding) {
-      logger.info(message);
+    logger.info(message);
   },
 };
 
+app.use(cors());
 app.use(morgan('dev', { stream: logger.stream }));
 
 //Index route
