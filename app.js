@@ -1,9 +1,13 @@
 var express = require('express');
+var cors = require('cors')
+
 var app = express();
+app.use(cors());
+
 var db = require('./db');
 
 //Index route
-app.get('/', (req, res) => {
+app.get('/', (req, res,next) => {
     res.send('Servidor corriendo...');
 });
 
