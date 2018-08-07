@@ -1,21 +1,23 @@
-# nodejs-restful-api
-![RESTful API design with Node.js](https://cdn-images-1.medium.com/max/2000/1*jjYC9tuf4C3HkHCP5PcKTA.jpeg "RESTful API design with Node.js")
+# m-server
 
-How to create a RESTful CRUD API using Nodejs?
 
-This tutorial will demo how to set up a bare bones 
-API using mongodb as the database.
+## Instalación
 
-It consist of a User model and controller. The model
-defines the data, and the controller will contain all 
-the business logic needed to interact with the database. 
+Clona el repositorio
 
-It has a db file which will be used to
-connect the app to the database, and an app file used
-for bootstrapping the application itself.
+```
+git clone https://github.com/pinuflo/m-server.git
+```
 
-The server file is used to spin up the server and tells the
-app to listen on a specific port.
+Instalar dependencias
+```
+npm install
+```
 
-Full tutorial can be found at:
-https://hackernoon.com/restful-api-design-with-node-js-26ccf66eab09#.s5l66zyeu
+## Correr servidor
+
+```
+npm start
+```
+
+El servidor correrá en el puerto 3000. Y se puede cambiar en el archivo `libs/config/config.dev.js`.
