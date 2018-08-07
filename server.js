@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const config = require('./libs/config/config.dev');
 const db = require('./db');
 const cors = require('cors')
+const router_api = require('./routes/routes_api')
 
 const app = express();
 
@@ -17,6 +18,9 @@ logger.stream = {
 
 app.use(cors());
 app.use(morgan('dev', { stream: logger.stream }));
+
+//Rutas api 
+app.use('/api', router_api);
 
 //Index route
 app.get('/', (req, res) => {
