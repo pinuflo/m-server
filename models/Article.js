@@ -2,16 +2,18 @@ var mongoose = require('mongoose');
 const UserModel = require('./User');
 const CategoryModel = require('./Category');
 const RegionModel = require('./Region');
-const ComunneModel = require('./Comunne');
+const ComunneModel = require('./Commune');
 
-var ArticleSchema = new mongoose.Schema({  
+const Schema = mongoose.Schema;
+
+var ArticleSchema = new Schema({  
   title: String,
   description: String,
   price: Number,
-  user: [UserModel],
-  category: [CategoryModel],
-  region: [RegionModel],
-  comunne: [ComunneModel]
+  user: { type : Schema.ObjectId, ref : 'User' },
+  category: { type : Schema.ObjectId, ref : 'Category' },
+  region: { type : Schema.ObjectId, ref : 'Region' },
+  comunne: { type : Schema.ObjectId, ref : 'Comunne' }
 });
 
 let ArticleModel = mongoose.model('Article', ArticleSchema);

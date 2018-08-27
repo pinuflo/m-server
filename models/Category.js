@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
 
 var CategorySchema = new mongoose.Schema({
-    nombre: String,
-    description: String
+    name: String,
+    description: String,
+    id_category: {type : Schema.ObjectId, ref: 'Category'}
 });
 
 mongoose.model('Category', CategorySchema);

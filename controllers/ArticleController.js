@@ -26,6 +26,8 @@ controller.addArticle = async (req, res) => {
     comunne: req.body.comunne
   });
 
+  logger.info(articleToAdd);
+
   try {
     const saveArticle = await Article.addArticle(articleToAdd);
     logger.info('Agregando articulo');
@@ -37,7 +39,7 @@ controller.addArticle = async (req, res) => {
   }
 }
 
-constroller.getDetail = async (req, res) => {
+controller.getDetail = async (req, res) => {
   try {
     const article = await Article.getDetail(req.params.id);
     logger.info('obteniendo articulo');
@@ -49,4 +51,4 @@ constroller.getDetail = async (req, res) => {
   }
 }
 
-module.export = controller;
+module.exports = controller;

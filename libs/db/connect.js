@@ -5,9 +5,6 @@ const config = require('../config/config.dev');
 Mongoose.Promise = global.Promise;
 
 const connectToDb = async () => {
-    let dbHost = config.dbHost;
-    let dbPort = config.dbPort;
-    let dbName = config.dbName;
     try {
         await Mongoose.connect(config.database_url_dev);
         logger.info('Conectado a mongoDB!');

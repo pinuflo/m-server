@@ -11,7 +11,7 @@ config.serverPort = process.env.serverPort || 3000;
 
 //datos momentaneos
 config.secret = 'supersecret';
-config.database_url_dev = 'mongodb://pkibernum:kiberserver2018@ds131531.mlab.com:31531/kiberad';
+config.database_url_dev = 'mongodb://shopmusic:Propro123@framesoft.cl:27017/shopmusic_db';
 
 
 module.exports = config;
