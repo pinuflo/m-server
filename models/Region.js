@@ -1,9 +1,15 @@
 const mongoose = require('mongoose');
 
-var RegionSchema = new mongoose.Schema({
+const Schema = mongoose.Schema;
+
+var RegionSchema = new Schema({
     name: String,
+    communes: Array,
     ordinal: String
 });
-mongoose.model('Region', RegionSchema);
+let RegionModel = mongoose.model('Region', RegionSchema);
 
+RegionModel.addRegion = (region) => {
+    return region.save();
+}
 module.exports = mongoose.model('Region');

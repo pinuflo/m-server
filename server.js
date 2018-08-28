@@ -6,6 +6,7 @@ const connectToDb = require('./libs/db/connect')
 const cors = require('cors');
 const router_api = require('./routes/routes_api');
 const bodyParser = require('body-parser');
+const formidable = require('express-formidable');
 
 const app = express();
 
@@ -22,6 +23,7 @@ logger.stream = {
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+//app.use(formidable());
 //app.use(morgan('dev', { stream: logger.stream }));
 
 app.use(morgan('dev', {

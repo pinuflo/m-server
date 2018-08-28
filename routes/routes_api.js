@@ -2,6 +2,8 @@ const express = require('express');
 var VerifyToken = require('../controllers/VerifyToken');
 const authController = require('../controllers/AuthController');
 const articleController = require('../controllers/ArticleController');
+const regionController = require('../controllers/RegionController');
+const logger = require('../libs/logger/app-logger');
 
 const router = express.Router();
 
@@ -42,6 +44,18 @@ router.post('/articles', (req, res) => {
 });
 /** ---------------------------------------------- */
 
+router.get('/regions', (req, res) => {
+    logger.info("regiones");
+});
+
+router.get('/regions/:id', (req, res) => {
+    logger.info("region_id");
+});
+
+router.post('/regions', (req, res) => {
+    logger.info("entre al posrt");
+    regionController.addRegion(req, res);
+});
 
 
 module.exports = router;    
