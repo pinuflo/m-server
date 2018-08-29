@@ -13,7 +13,8 @@ var ArticleSchema = new Schema({
   user: { type : Schema.ObjectId, ref : 'User' },
   category: { type : Schema.ObjectId, ref : 'Category' },
   region: { type : Schema.ObjectId, ref : 'Region' },
-  comunne: String
+  comunne: String,
+  image: String
 });
 
 let ArticleModel = mongoose.model('Article', ArticleSchema);
