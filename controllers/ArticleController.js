@@ -18,10 +18,7 @@ var storage = multer.diskStorage({
   }
 });
 
-
-
 var upload = multer({ storage: storage }).single('imagen');
-
 
 controller.addArticle = async (req, res) => {
 
@@ -56,10 +53,10 @@ controller.addArticle = async (req, res) => {
   //logger.info(articleToAdd);
 
   //try {
-    //const saveArticle = await Article.addArticle(articleToAdd);
+    const saveArticle = await Article.addArticle(articleToAdd);
 
     //logger.info(' articulo agregado');
-    //res.status(200).send("ok");
+    res.status(200).send("ok");
   //}
   //catch(err) {
     //logger.error('Error agregando articulo: '+ err);
