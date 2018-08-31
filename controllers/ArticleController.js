@@ -21,47 +21,40 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage }).single('imagen');
 
 controller.addArticle = async (req, res) => {
-
-  upload(req, res, function (err) {
-    logger.info(">>>",req.file.filename);
+  upload(req, res, function (err) {             
     if (err) {
-        // An error occurred when uploading
-        logger.error('Error subiendo imagen: ', err);
-        res.json({
-          success: false,
-          message: err
-        });
-    } else {
+      // Error
+      logger.error('Error subiendo imagen: ', err);
       res.json({
-        success: true,
-        message: 'Imagen subida'
+        success: false,
+        message: err
       });
     }
-  });
+    
+    //Construimos el articulo
+    let articleToAdd = Article({
+      title: req.body.title,
+      description: req.body.description,
+      price: req.body.price,
+      user: req.body.user,
+      category: req.body.category,
+      region: req.body.region,
+      comunne: req.body.comunne,
+      image: req.file.filename
+    });
 
-  let articleToAdd = Article({
-    title: req.body.title,
-    description: req.body.description,
-    price: req.body.price,
-    user: req.body.user,
-    category: req.body.category,
-    region: req.body.region,
-    comunne: req.body.comunne,
-    imagen: "imagen.name"
-  });
-
-  //logger.info(articleToAdd);
-
-  //try {
-    const saveArticle = await Article.addArticle(articleToAdd);
-
-    //logger.info(' articulo agregado');
-    res.status(200).send("ok");
-  //}
-  //catch(err) {
-    //logger.error('Error agregando articulo: '+ err);
-    //res.status(500).send('Error agregando articulo');
- // }
+    logger.info(articleToAdd);
+    try {
+      const saveArticle = Article.addArticle(articleToAdd);
+      logger.info(' articulo agregado');
+      res.status(200).send("ok");
+    }
+    catch(err) {
+      logger.error('Error agregando articulo: '+ err);
+      res.status(500).send('Error agregando articulo');
+    }
+ 
+  });  
 }
 
 controller.getAll = async (req, res) => {
