@@ -7,14 +7,14 @@ const ComunneModel = require('./Commune');
 const Schema = mongoose.Schema;
 
 var ArticleSchema = new Schema({  
-  title: String,
-  description: String,
-  price: Number,
-  user: { type : Schema.ObjectId, ref : 'User' },
-  category: { type : Schema.ObjectId, ref : 'Category' },
-  region: { type : Schema.ObjectId, ref : 'Region' },
-  comunne: String,
-  image: String
+  title:       { type: String },
+  description: { type: String, required: true },
+  price:       { type: Number, required: true },
+  comunne:     { type: String, required: true },
+  image:       { type: String, required: true },
+  user:        { type : Schema.ObjectId, ref : 'User', required: true },
+  category:    { type : Schema.ObjectId, ref : 'Category', required: true },
+  region:      { type : Schema.ObjectId, ref : 'Region', required: true }  
 });
 
 let ArticleModel = mongoose.model('Article', ArticleSchema);

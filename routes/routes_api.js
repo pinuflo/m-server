@@ -1,5 +1,6 @@
 const express = require('express');
 var VerifyToken = require('../controllers/VerifyToken');
+var StorageImage = require('../controllers/StorageImage');
 const authController = require('../controllers/AuthController');
 const articleController = require('../controllers/ArticleController');
 const regionController = require('../controllers/RegionController');
@@ -39,8 +40,8 @@ router.get('/articles/:id', (req, res) => {
     articleController.getDetail(req, res);
 });
 
-router.post('/articles', (req, res) => {
-    articleController.addArticle(req, res);
+router.post('/articles', (req, res, next) => {
+    articleController.addArticle(req, res, next);
 });
 /** ---------------------------------------------- */
 
